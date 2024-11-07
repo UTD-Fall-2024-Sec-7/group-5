@@ -1,7 +1,9 @@
 let reservations = [];
+let users = [];
 
 function addReservation() {
     const name = prompt("Enter your name: ");
+    let username = null;
     const date = prompt("Enter reservation date in the format (YYYY-MM-DD): ");
     const time = prompt("Enter reservation time in the format (HH:MM): ");
     const guests = parseInt(prompt("Enter the number of guests: "));
@@ -26,6 +28,7 @@ function addReservation() {
     const reservation = {
         id: reservations.length + 1,
         name: name,
+        username: username,
         date: date,
         time: time,
         guests: guests,
@@ -79,11 +82,11 @@ function sortReservations() {
 }
 
 function reservationSystem() {
+    let username = prompt("Enter a username:")
     let selection = "";
-
-    while (selection !== "4") {
-        selection = prompt("Choose an option:\n1. Add Reservation\n2. View Reservations\n3. Sort Reservations\n4. Exit\n");
-
+    if(username == "admin") {
+        while (selection !== "4") {
+            selection = prompt("Choose an option:\n1. Add Reservation\n2. View Reservations\n3. Sort Reservations\n4. Exit\n");
         switch (selection) {
             case "1": 
                 addReservation(); 
@@ -99,6 +102,24 @@ function reservationSystem() {
                 break;
             default: 
                 console.log("Invalid choice, please enter a number between 1 and 4.");
+            }
+        } 
+    } else {
+        while (selection !== "3") {
+            selection = prompt("Choose an option:\n1. View Reservations\n2. Sort Reservations\n3. Exit\n");
+            switch (selection) {
+                case "1": 
+                    viewReservations(); 
+                    break;
+                case "2": 
+                    sortReservations(); 
+                    break;
+                case "3": 
+                    console.log("Exiting"); 
+                    break;
+                default: 
+                    console.log("Invalid choice, please enter a number between 1 and 3.");
+            }
         }
     }
 }
