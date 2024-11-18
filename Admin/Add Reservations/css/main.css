@@ -294,3 +294,17 @@ table td button.delete-btn:hover {
     border-bottom: 1px solid #dee2e6;
   }
 }
+/* Style for Logout Button */
+nav button#logoutButton {
+  background: none;
+  border: none;
+  color: #fff;
+  margin: 0 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+nav button#logoutButton:hover {
+  text-decoration: underline;
+}

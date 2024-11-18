@@ -551,3 +551,23 @@ document.addEventListener("DOMContentLoaded", () => {
   setDateConstraints();
   initializePage();
 });
+// Wait until the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+  // Select the Logout button by its ID
+  const logoutButton = document.getElementById("logoutButton");
+
+  // Check if the Logout button exists on the page
+  if (logoutButton) {
+    // Add a click event listener to the Logout button
+    logoutButton.addEventListener("click", function () {
+      // Optional: Perform any cleanup operations here
+      // For example, clearing user data from localStorage or sessionStorage
+      // localStorage.clear();
+      // sessionStorage.clear();
+
+      // Redirect to the logout placeholder page
+      // Replace 'logout.html' with the actual logout URL when available
+      window.location.href = "../../Login_page/login.html";
+    });
+  }
+});
