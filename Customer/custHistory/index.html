@@ -1,1 +1,106 @@
-<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet" /><link href="https://fonts.googleapis.com/css?family=Inika&display=swap" rel="stylesheet" /><link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" /><link href="./css/main.css" rel="stylesheet" /><title>Document</title></head><body><div class="v20_3050"><div class="name"></div><div class="v20_3052"></div><div class="name"></div><div class="v20_3054"><div class="v20_3055"></div></div><span class="v20_3056">Gourmet</span><div class="name"></div><span class="v20_3058">Customer</span><div class="v20_3059"></div><span class="v20_3060">Search</span><span class="v20_3061">Account</span><span class="v20_3062">Notification</span><span class="v20_3063">Sign out</span><div class="v20_3179"></div><span class="v20_3064">History</span><div class="name"></div><span class="v20_3183">Reservation History</span><div class="v20_3184"></div><span class="v21_552">$100</span><span class="v21_554">$100</span><span class="v21_556">$100</span><span class="v21_558">$100</span><span class="v21_560">$100</span><span class="v21_543">2</span><span class="v21_545">2</span><span class="v21_547">2</span><span class="v21_539">2</span><span class="v21_541">2</span><span class="v21_530">1 Jan, 2024</span><span class="v21_532">1 Jan, 2024</span><span class="v21_509">Res A</span><span class="v21_511">Res A</span><span class="v21_513">Res A</span><span class="v21_515">Res A</span><span class="v21_517">Res A</span><span class="v21_519">Res A</span><div class="name"></div><div class="name"></div><div class="name"></div><div class="name"></div><span class="v20_3191">Search History</span><div class="name"></div><div class="name"></div><span class="v20_3200">Sort by</span><span class="v20_3203">Restaurant</span><span class="v21_485">Date</span><span class="v21_486">Party Size</span><span class="v21_487">Amount</span><div class="v21_488"></div><div class="v21_490"></div><div class="v21_492"></div><div class="name"></div><span class="v21_505">Res A</span><span class="v21_521">1 Jan, 2024</span><span class="v21_522">1 Jan, 2024</span><span class="v21_524">1 Jan, 2024</span><span class="v21_526">1 Jan, 2024</span><span class="v21_528">1 Jan, 2024</span><span class="v21_534">2</span><span class="v21_537">2</span><span class="v21_549">$100</span><span class="v21_550">$100</span></div></body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inika&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./css/main.css" rel="stylesheet" />
+    <title>Reservation History</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo-search-container">
+        <span class="logo">Gourmet</span>
+        <div class="search">
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+      <div class="menu">
+        <span class="menu-toggle">Customer &#9776;</span>
+        <div class="menu-content">
+          <span>Account</span>
+          <span>Notification</span>
+          <span>Dashboard</span>
+          <span>Sign out</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reservation-history">
+      <span class="title">Reservation History</span>
+      <div class="search-section">
+        <span class="search-label">Search History</span>
+        <span class="sort-label">Sort by</span>
+      </div>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Restaurant</th>
+            <th>Date</th>
+            <th>Party Size</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="history-table-body">
+          <!-- Rows will be dynamically generated here -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      // Function to populate the reservation table
+      function populateReservationTable(data) {
+        const tableBody = document.getElementById("history-table-body");
+        tableBody.innerHTML = ""; // Clear the current content
+
+        data.forEach((reservation) => {
+          const row = document.createElement("tr");
+
+          // Create and append cells for each piece of data
+          const restaurantCell = document.createElement("td");
+          restaurantCell.textContent = reservation.restaurant;
+          row.appendChild(restaurantCell);
+
+          const dateCell = document.createElement("td");
+          dateCell.textContent = reservation.date;
+          row.appendChild(dateCell);
+
+          const partySizeCell = document.createElement("td");
+          partySizeCell.textContent = reservation.partySize;
+          row.appendChild(partySizeCell);
+
+          const amountCell = document.createElement("td");
+          amountCell.textContent = reservation.amount;
+          row.appendChild(amountCell);
+
+          // Append the row to the table body
+          tableBody.appendChild(row);
+        });
+      }
+
+      // Fetch the reservation data from the JSON file
+      fetch("reservations.json")
+        .then((response) => response.json())
+        .then((data) => populateReservationTable(data))
+        .catch((error) =>
+          console.error("Error fetching reservation data:", error)
+        );
+
+      // Menu toggle script
+      document
+        .querySelector(".menu-toggle")
+        .addEventListener("click", function () {
+          document.querySelector(".menu-content").classList.toggle("active");
+        });
+    </script>
+  </body>
+</html>
