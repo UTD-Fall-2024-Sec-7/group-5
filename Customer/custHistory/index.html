@@ -17,22 +17,28 @@
     <title>Reservation History</title>
   </head>
   <body>
-    <div class="header">
-      <div class="logo-search-container">
-        <span class="logo">Gourmet</span>
-        <div class="search">
-          <input type="text" placeholder="Search" />
+    <div class="dashboard">
+      <header class="header">
+        <div class="logo">
+          <span class="logo-text">Gourmet</span>
         </div>
-      </div>
-      <div class="menu">
-        <span class="menu-toggle">Customer &#9776;</span>
-        <div class="menu-content">
-          <span>Account</span>
-          <span>Notification</span>
-          <span>Dashboard</span>
-          <span>Sign out</span>
+        <input type="text" class="search-bar" placeholder="Search" />
+        <div class="menu">
+          <span>Customer</span>
+          <div class="dropdown">
+            <button class="dropdown-button">☰</button>
+            <div class="dropdown-content">
+              <a href="#" onclick="handleAccount()">Account</a>
+              <a href="#" onclick="handleNotification()">Notification</a>
+              <a href="#" onclick="handleDashboard()">Dashboard</a>
+              <a href="#" onclick="handleSignOut()">Sign out</a>
+            </div>
+          </div>
         </div>
-      </div>
+      </header>
+      <main class="list-container" id="list-container">
+        <!-- List items will be dynamically generated here -->
+      </main>
     </div>
 
     <div class="reservation-history">
@@ -102,5 +108,6 @@
           document.querySelector(".menu-content").classList.toggle("active");
         });
     </script>
+    <script src="navigation.js"></script>
   </body>
 </html>

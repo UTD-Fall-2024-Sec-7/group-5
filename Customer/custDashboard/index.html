@@ -26,10 +26,10 @@
           <div class="dropdown">
             <button class="dropdown-button">☰</button>
             <div class="dropdown-content">
-              <a href="#">Account</a>
-              <a href="#">Notification</a>
-              <a href="#">History</a>
-              <a href="#">Sign out</a>
+              <a href="#" onclick="handleAccount()">Account</a>
+              <a href="#" onclick="handleNotification()">Notification</a>
+              <a href="#" onclick="handleHistory()">History</a>
+              <a href="#" onclick="handleSignOut()">Sign out</a>
             </div>
           </div>
         </div>
@@ -95,5 +95,7 @@
           console.error("Error fetching restaurant data:", error)
         );
     </script>
+    <!-- Add this just before the closing body tag -->
+    <script src="navigation.js"></script>
   </body>
 </html>
