@@ -1,1 +1,78 @@
-<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css?family=NATS&display=swap" rel="stylesheet" /><link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet" /><link href="./css/main.css" rel="stylesheet" /><title>Document</title></head><body><div class="v10_8"><div class="v10_9"></div><div class="v10_10"></div><span class="v10_39">Book</span><span class="v10_58">List</span><span class="v10_61">Reservations</span><span class="v10_63">2</span><div class="name"></div><div class="name"></div><div class="name"></div><div class="name"></div><div class="v10_83"></div><div class="name"></div><span class="v13_90">Add reservation</span><span class="v15_456">Location</span><span class="v15_474">Party Size</span><div class="v15_476"></div><div class="v15_483"></div><div class="v15_485"></div><div class="v15_518"></div><div class="v15_479"></div><div class="v15_481"></div><div class="v15_477"></div><span class="v15_487">First Name</span><span class="v15_488">Last Name</span><span class="v15_489">Email</span><span class="v15_490">Phone Number</span><span class="v15_524">Time</span><div class="v15_525"></div><span class="v15_526">Book</span><div class="v18_455"></div><span class="v10_11">Gourmet</span></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Reservation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=NATS&display=swap" rel="stylesheet" />
+  <script type="text/javascript" src="scripts.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "XwrK8EeU-0bXR5ojD",
+      });
+    })();
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Gourmet Reservations</h1>
+    <nav>
+      <a href="index.html">Add</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="list.html">Manage</a>
+      <!-- Logout Button -->
+      <button id="logoutButton">Logout</button>
+    </nav>
+  </header>
+  <main>
+    <h2>Add Reservation</h2>
+    <form id="reservationForm">
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" placeholder="Enter location" required />
+
+      <label for="partySize">Party Size</label>
+      <select id="partySize" name="partySize" required>
+        <option value="" disabled selected>Select party size</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="time">Time</label>
+      <input type="time" id="time" name="time" required />
+
+      <button type="button" id="addReservation">Add Reservation</button>
+    </form>
+  </main>
+  <script src="js/scripts.js"></script>
+</body>
+
+</html>
