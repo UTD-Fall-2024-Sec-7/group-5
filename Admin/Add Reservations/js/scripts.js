@@ -1,7 +1,3 @@
-// scripts.js
-
-// Utility Functions
-
 /**
  * Retrieves reservations from localStorage.
  * @returns {Array} Array of reservation objects.
@@ -136,6 +132,16 @@ function addReservation() {
   reservations.push(reservation);
   saveReservations(reservations);
   alert("Reservation added successfully!");
+  
+  var params = {
+    to_name : document.getElementById("firstName").value,
+    date : document.getElementById("date").value,
+    time : document.getElementById("time").value,
+    to_email : document.getElementById("email").value
+  }
+  
+  emailjs.send("service_ntlyj2e", "template_gm23asd", params)
+
   form.reset();
 
   // Re-render calendar if on calendar.html
