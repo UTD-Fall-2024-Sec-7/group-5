@@ -77,7 +77,6 @@ function renderReservationList() {
                 Phone: ${res.phone}
             </div>
             <div>
-                <button onclick="editReservation(${index})">Edit</button>
                 <button onclick="removeReservation(${index})">Delete</button>
             </div>
         `;
@@ -151,22 +150,6 @@ function addReservation() {
 }
 
 /**
- * Edits an existing reservation.
- * @param {number} index - Index of the reservation to edit.
- */
-function editReservation(index) {
-  const reservations = getReservations();
-  const res = reservations[index];
-  if (!res) {
-    alert("Reservation not found.");
-    return;
-  }
-
-  // Redirect to index.html with query parameter for editing
-  window.location.href = `index.html?edit=${index}`;
-}
-
-/**
  * Removes a reservation.
  * @param {number} index - Index of the reservation to remove.
  */
@@ -183,114 +166,6 @@ function removeReservation(index) {
   saveReservations(reservations);
   renderReservationList();
   alert("Reservation deleted successfully!");
-
-  // Re-render calendar if on calendar.html
-  if (window.location.pathname.includes("calendar.html")) {
-    renderCalendar(currentYear, currentMonth);
-  }
-}
-
-/**
- * Handles editing of a reservation on index.html.
- */
-function handleEdit() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const editIndex = urlParams.get("edit");
-  if (editIndex === null) return;
-
-  const reservations = getReservations();
-  const res = reservations[editIndex];
-  if (!res) {
-    alert("Reservation not found.");
-    return;
-  }
-
-  const form = document.getElementById("reservationForm");
-  if (!form) return;
-
-  form.location.value = res.location;
-  form.partySize.value = res.partySize;
-  form.firstName.value = res.firstName;
-  form.lastName.value = res.lastName;
-  form.email.value = res.email;
-  form.phone.value = res.phone;
-  form.date.value = res.date;
-  form.time.value = res.time;
-
-  // Change button to "Update Reservation"
-  const addButton = document.getElementById("addReservation");
-  if (addButton) {
-    addButton.textContent = "Update Reservation";
-    addButton.onclick = function () {
-      updateReservation(editIndex);
-    };
-  }
-}
-
-/**
- * Updates an existing reservation.
- * @param {number} index - Index of the reservation to update.
- */
-function updateReservation(index) {
-  const form = document.getElementById("reservationForm");
-  if (!form) return;
-
-  const reservations = getReservations();
-  if (index < 0 || index >= reservations.length) {
-    alert("Invalid reservation index.");
-    return;
-  }
-
-  const updatedReservation = {
-    location: form.location.value.trim(),
-    partySize: form.partySize.value,
-    firstName: form.firstName.value.trim(),
-    lastName: form.lastName.value.trim(),
-    email: form.email.value.trim(),
-    phone: form.phone.value.trim(),
-    date: form.date.value,
-    time: form.time.value,
-  };
-
-  // Basic validation
-  if (
-    !updatedReservation.location ||
-    !updatedReservation.partySize ||
-    !updatedReservation.firstName ||
-    !updatedReservation.lastName ||
-    !updatedReservation.email ||
-    !updatedReservation.phone ||
-    !updatedReservation.date ||
-    !updatedReservation.time
-  ) {
-    alert("Please fill in all fields.");
-    return;
-  }
-
-  // Validate date is within allowed range
-  const today = new Date();
-  const thirtyDaysLater = addThirtyDays(today);
-  const selectedDate = new Date(updatedReservation.date);
-
-  if (selectedDate < today || selectedDate > thirtyDaysLater) {
-    alert("Please select a date within the next 30 days.");
-    return;
-  }
-
-  reservations[index] = updatedReservation;
-  saveReservations(reservations);
-  alert("Reservation updated successfully!");
-  form.reset();
-
-  // Reset button to "Add Reservation"
-  const addButton = document.getElementById("addReservation");
-  if (addButton) {
-    addButton.textContent = "Add Reservation";
-    addButton.onclick = addReservation;
-  }
-
-  // Remove the edit parameter from URL
-  window.history.replaceState({}, document.title, "index.html");
 
   // Re-render calendar if on calendar.html
   if (window.location.pathname.includes("calendar.html")) {
@@ -477,17 +352,11 @@ function renderReservationList() {
     cell = row.insertCell(7);
     cell.setAttribute("data-label", "Actions");
 
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    editButton.classList.add("edit-btn");
-    editButton.onclick = () => editReservation(index);
-
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("delete-btn");
     deleteButton.onclick = () => removeReservation(index);
 
-    cell.appendChild(editButton);
     cell.appendChild(deleteButton);
   });
 }
@@ -504,9 +373,6 @@ function initializePage() {
     if (addButton) {
       addButton.addEventListener("click", addReservation);
     }
-
-    // Handle Edit if applicable
-    handleEdit();
   } else if (currentPage === "list.html") {
     // Manage Reservations Page
     renderReservationList();
