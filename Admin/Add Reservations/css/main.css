@@ -1,0 +1,310 @@
+/* main.css */
+
+/* Reset styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "NATS", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+header {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-family: "Pacifico", cursive;
+  font-size: 2.5em;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+form button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Calendar Styles */
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0 10px;
+  transition: background-color 0.3s;
+}
+
+.calendar-header button:hover {
+  background-color: #0056b3;
+}
+
+#monthYear {
+  font-size: 1.5em;
+  font-family: "Pacifico", cursive;
+}
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day-label {
+  background-color: #343a40;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.blank {
+  background-color: transparent;
+}
+
+.day-cell {
+  background-color: #fff;
+  padding: 15px;
+  min-height: 100px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.day-cell:hover {
+  background-color: #e9ecef;
+}
+
+.day-cell.reserved {
+  background-color: #ffc107;
+}
+
+.day-cell.disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.day-cell.disabled:hover {
+  background-color: #f8f9fa;
+}
+
+/* Reservations Panel */
+#reservationsPanel {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+#reservationsPanel h3 {
+  margin-top: 0;
+}
+
+#reservationsList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#reservationsList li {
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+#reservationsList li:last-child {
+  border-bottom: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .calendar-header {
+    flex-direction: column;
+  }
+
+  .calendar-header button {
+    margin: 10px 0;
+  }
+
+  #monthYear {
+    margin: 10px 0;
+  }
+
+  .day-cell {
+    min-height: 80px;
+    padding: 10px;
+  }
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 1em;
+}
+
+table thead {
+  background-color: #343a40;
+  color: #fff;
+}
+
+table th,
+table td {
+  padding: 12px 15px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+table td button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+}
+
+table td button.edit-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+table td button.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+table td button.edit-btn:hover {
+  background-color: #218838;
+}
+
+table td button.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Responsive Design for Table */
+@media (max-width: 768px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  table tr {
+    margin-bottom: 15px;
+  }
+
+  table td {
+    padding-left: 50%;
+    position: relative;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    font-weight: bold;
+  }
+
+  table td:last-child {
+    border-bottom: 1px solid #dee2e6;
+  }
+}
+/* Style for Logout Button */
+nav button#logoutButton {
+  background: none;
+  border: none;
+  color: #fff;
+  margin: 0 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+nav button#logoutButton:hover {
+  text-decoration: underline;
+}
