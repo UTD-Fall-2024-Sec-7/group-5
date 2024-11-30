@@ -27,97 +27,163 @@
           </div>
         </div>
       </header>
-      <main class="list-container" id="list-container">
-        <!-- List items will be dynamically generated here -->
-      </main>
     </div>
     <div class="historyLabel">Reservation History</div> 
     <div class="sub-history">View your current and past reservation</div>
     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="" viewBox="0 0 1349 2" fill="none">
       <path d="M-3.26013e-05 0.897185L1348.52 0.897217" stroke="black" stroke-opacity="0.21"/>
       </svg>
-    <span class="text1">Upcoming</span>
+
     <div class="design">
-      <span class="text2">Past</span>
       <div class="upcoming-container">
-          <div class="person-Icon"></div>
-          <span class="partySize">Number</span>
-          <span class="partyName">First Last</span>
-          <div class="calendar-icon"></div>
-          <span class="date">Dec 1, 2024</span>
-          <div class="time-icon"></div>
-          <span class="time">7:00PM</span>
+        <div class="text1">Upcoming</div>
+        <main class="list-container" id="list-container">
+        </main>
       </div>
-
-        <div class="upcoming-container2">
-            <div class="person-Icon2"></div>
-            <span class="partySize2">Number</span>
-            <span class="partyName2">First Last</span>
-            <div class="calendar-icon2"></div>
-            <span class="date2">Dec 1, 2024</span>
-            <div class="time-icon2"></div>
-            <span class="time2">7:00PM</span>
-        </div>
-
-    </div>
-    
-    
-
+      <div class="upcoming-container2">
+        <div class="text2">Past</div>
+        <main class="list-container2" id="list-container2">
+        </main>
+      </div>
     <script>
-      /*// Function to populate the list of restaurants
-      function populateList(data) {
+      // Function to populate the list of reservations
+      function populateCurrent(data) {
         const listContainer = document.getElementById("list-container");
         listContainer.innerHTML = ""; // Clear the current content
-
-        data.forEach((restaurant) => {
+    
+        data.forEach((reservation) => {
+          if(reservation.email === localStorage.getItem("loggedInUser") && new Date(reservation.date).getTime() > new Date().getTime())
+        {
           // Create a div for list-item
           const listItem = document.createElement("div");
           listItem.classList.add("list-item");
-
-          // Create an image element for the restaurant
-          const imgElement = document.createElement("img");
-          imgElement.src = restaurant.image;
-          imgElement.alt = "icon";
-          imgElement.classList.add("icon-placeholder");
-          listItem.appendChild(imgElement);
-
+    
           // Create a div for details
           const detailsDiv = document.createElement("div");
           detailsDiv.classList.add("details");
-
-          const nameElement = document.createElement("h3");
-          nameElement.textContent = restaurant.name;
+    
+          // Add location
+          const locationElement = document.createElement("h3");
+          locationElement.textContent = `Location: ${reservation.location}`;
+          detailsDiv.appendChild(locationElement);
+    
+          // Add party size
+          const partySizeElement = document.createElement("p");
+          partySizeElement.textContent = `Party Size: ${reservation.partySize}`;
+          detailsDiv.appendChild(partySizeElement);
+    
+          // Add name
+          const nameElement = document.createElement("p");
+          nameElement.textContent = `Name: ${reservation.firstName} ${reservation.lastName}`;
           detailsDiv.appendChild(nameElement);
-
-          const categoryElement = document.createElement("p");
-          categoryElement.textContent = `${restaurant.category} • ${restaurant.price} • ${restaurant.distance}`;
-          detailsDiv.appendChild(categoryElement);
-
-          const descriptionElement = document.createElement("p");
-          descriptionElement.textContent = restaurant.description;
-          detailsDiv.appendChild(descriptionElement);
-
+    
+          // Add email
+          const emailElement = document.createElement("p");
+          emailElement.textContent = `Email: ${reservation.email}`;
+          detailsDiv.appendChild(emailElement);
+    
+          // Add phone
+          const phoneElement = document.createElement("p");
+          phoneElement.textContent = `Phone: ${reservation.phone}`;
+          detailsDiv.appendChild(phoneElement);
+    
+          // Add date and time
+          const dateTimeElement = document.createElement("p");
+          dateTimeElement.textContent = `Date: ${reservation.date}, Time: ${reservation.time}`;
+          detailsDiv.appendChild(dateTimeElement);
+    
           listItem.appendChild(detailsDiv);
-
-          // Create a div for rating
-          const ratingDiv = document.createElement("div");
-          ratingDiv.classList.add("rating");
-          ratingDiv.textContent = restaurant.rating;
-
-          listItem.appendChild(ratingDiv);
-
+    
           // Append the list-item to the list container
           listContainer.appendChild(listItem);
+        }
+          
         });
       }
-      */
-      // Fetch the restaurant list from the JSON file
-      fetch("restaurantList.json")
-        .then((response) => response.json())
-        .then((data) => populateList(data))
-        .catch((error) =>
-          console.error("Error fetching restaurant data:", error)
-        );
+    
+      // Fetch the reservations data from localStorage
+      document.addEventListener("DOMContentLoaded", () => {
+        try {
+          const reservations = JSON.parse(localStorage.getItem("reservations"));
+          if (reservations && Array.isArray(reservations)) {
+            populateCurrent(reservations);
+          } else {
+            console.error("No reservations found or data is not an array.");
+          }
+        } catch (error) {
+          console.error("Error parsing reservations from localStorage:", error);
+        }
+      });
+    </script>
+    <script>
+      // Function to populate the list of reservations
+      function populateOld(data) {
+        const listContainer2 = document.getElementById("list-container2");
+        listContainer2.innerHTML = ""; // Clear the current content
+    
+        data.forEach((reservation) => {
+          if(reservation.email === localStorage.getItem("loggedInUser") && new Date(reservation.date).getTime() < new Date().getTime())
+        {
+          // Create a div for list-item
+          const listItem = document.createElement("div");
+          listItem.classList.add("list-item");
+    
+          // Create a div for details
+          const detailsDiv = document.createElement("div");
+          detailsDiv.classList.add("details");
+    
+          // Add location
+          const locationElement = document.createElement("h3");
+          locationElement.textContent = `Location: ${reservation.location}`;
+          detailsDiv.appendChild(locationElement);
+    
+          // Add party size
+          const partySizeElement = document.createElement("p");
+          partySizeElement.textContent = `Party Size: ${reservation.partySize}`;
+          detailsDiv.appendChild(partySizeElement);
+    
+          // Add name
+          const nameElement = document.createElement("p");
+          nameElement.textContent = `Name: ${reservation.firstName} ${reservation.lastName}`;
+          detailsDiv.appendChild(nameElement);
+    
+          // Add email
+          const emailElement = document.createElement("p");
+          emailElement.textContent = `Email: ${reservation.email}`;
+          detailsDiv.appendChild(emailElement);
+    
+          // Add phone
+          const phoneElement = document.createElement("p");
+          phoneElement.textContent = `Phone: ${reservation.phone}`;
+          detailsDiv.appendChild(phoneElement);
+    
+          // Add date and time
+          const dateTimeElement = document.createElement("p");
+          dateTimeElement.textContent = `Date: ${reservation.date}, Time: ${reservation.time}`;
+          detailsDiv.appendChild(dateTimeElement);
+    
+          listItem.appendChild(detailsDiv);
+    
+          // Append the list-item to the list container
+          listContainer2.appendChild(listItem);
+        }
+          
+        });
+      }
+    
+      // Fetch the reservations data from localStorage
+      document.addEventListener("DOMContentLoaded", () => {
+        try {
+          const reservations = JSON.parse(localStorage.getItem("reservations"));
+          if (reservations && Array.isArray(reservations)) {
+            populateOld(reservations);
+          } else {
+            console.error("No reservations found or data is not an array.");
+          }
+        } catch (error) {
+          console.error("Error parsing reservations from localStorage:", error);
+        }
+      });
     </script>
     <!-- Add this just before the closing body tag -->
     <script src="navigation.js"></script>

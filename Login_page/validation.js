@@ -40,6 +40,7 @@ form.addEventListener('submit', (e) => {
 
   if (user) {
     currentUserRole = user.role;
+    localStorage.setItem("loggedInUser", email_input.value)
     console.log("Some more tesing")
     //document.getElementById(
     //  "message"
