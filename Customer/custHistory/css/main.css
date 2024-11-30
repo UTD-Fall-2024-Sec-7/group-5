@@ -29,11 +29,6 @@ body {
   align-items: center;
 }
 
-.logo {
-  font-family: "Pacifico", cursive;
-  font-size: 24px;
-  color: #d32f2f;
-}
 
 .search {
   flex-grow: 1;
@@ -63,7 +58,30 @@ body {
   border-bottom: 1px solid #e0e0e0;
 }
 
-.logo {
+
+h1 {
+  text-align: left;
+  color: #BA1F1F;
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 15px;
+  margin-right: 3px;
+}
+
+.logo {  
+  width: 140px;  /* Increased container width */
+  height: 90px; /* Increased container height */
+  margin-left: 10px;
+  background-image: url(images/vector.png);
+  background-repeat: no-repeat;
+  background-size: 102px 88px; /* Keep original image size */
+  background-position: center; 
+
+}
+
+.logo-text {  
   font-family: "Pacifico", cursive;
   font-size: 24px;
   color: #d32f2f;

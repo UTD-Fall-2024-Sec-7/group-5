@@ -13,13 +13,14 @@
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="dashboard">
       <header class="header">
-        <div class="logo">
-          <span class="logo-text">Gourmet</span>
-        </div>
+        <div class="logo"> 
+          <h1>Gourmet</h1></div>
         <div class="menu">
           <div class="signout">
               <a href="#" onclick="handleSignOut()">Sign Out</a>
@@ -30,9 +31,40 @@
         <!-- List items will be dynamically generated here -->
       </main>
     </div>
+    <div class="historyLabel">Reservation History</div> 
+    <div class="sub-history">View your current and past reservation</div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="" viewBox="0 0 1349 2" fill="none">
+      <path d="M-3.26013e-05 0.897185L1348.52 0.897217" stroke="black" stroke-opacity="0.21"/>
+      </svg>
+    <span class="text1">Upcoming</span>
+    <div class="design">
+      <span class="text2">Past</span>
+      <div class="upcoming-container">
+          <div class="person-Icon"></div>
+          <span class="partySize">Number</span>
+          <span class="partyName">First Last</span>
+          <div class="calendar-icon"></div>
+          <span class="date">Dec 1, 2024</span>
+          <div class="time-icon"></div>
+          <span class="time">7:00PM</span>
+      </div>
+
+        <div class="upcoming-container2">
+            <div class="person-Icon2"></div>
+            <span class="partySize2">Number</span>
+            <span class="partyName2">First Last</span>
+            <div class="calendar-icon2"></div>
+            <span class="date2">Dec 1, 2024</span>
+            <div class="time-icon2"></div>
+            <span class="time2">7:00PM</span>
+        </div>
+
+    </div>
+    
+    
 
     <script>
-      // Function to populate the list of restaurants
+      /*// Function to populate the list of restaurants
       function populateList(data) {
         const listContainer = document.getElementById("list-container");
         listContainer.innerHTML = ""; // Clear the current content
@@ -78,7 +110,7 @@
           listContainer.appendChild(listItem);
         });
       }
-
+      */
       // Fetch the restaurant list from the JSON file
       fetch("restaurantList.json")
         .then((response) => response.json())
