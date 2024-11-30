@@ -77,7 +77,9 @@ function renderReservationList() {
                 Phone: ${res.phone}
             </div>
             <div>
+
                 <button onclick="editReservation(${index})">Edit</button>
+
                 <button onclick="removeReservation(${index})">Delete</button>
             </div>
         `;
@@ -167,6 +169,7 @@ function editReservation(index) {
 }
 
 /**
+
  * Removes a reservation.
  * @param {number} index - Index of the reservation to remove.
  */
@@ -189,6 +192,7 @@ function removeReservation(index) {
     renderCalendar(currentYear, currentMonth);
   }
 }
+
 
 /**
  * Handles editing of a reservation on index.html.
@@ -477,17 +481,21 @@ function renderReservationList() {
     cell = row.insertCell(7);
     cell.setAttribute("data-label", "Actions");
 
+
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
     editButton.classList.add("edit-btn");
     editButton.onclick = () => editReservation(index);
+
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("delete-btn");
     deleteButton.onclick = () => removeReservation(index);
 
+
     cell.appendChild(editButton);
+
     cell.appendChild(deleteButton);
   });
 }
@@ -507,6 +515,7 @@ function initializePage() {
 
     // Handle Edit if applicable
     handleEdit();
+
   } else if (currentPage === "list.html") {
     // Manage Reservations Page
     renderReservationList();
