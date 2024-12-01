@@ -8,12 +8,14 @@ let currentUserRole = null;
 document.getElementById("login-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const username = document.getElementById("username").value;
+  const username = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  
+  localStorage.setItem("loggedInUser", username)
   
   // Find user in the imported users array
   const user = users.find(
-    (u) => u.username === username && u.password === password
+    (u) => u.email === username && u.password === password
   );
 
   if (user) {
