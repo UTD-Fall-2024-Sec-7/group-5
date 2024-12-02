@@ -43,3 +43,12 @@ function checkLoginStatus() {
 
 // Run check when page loads
 document.addEventListener("DOMContentLoaded", checkLoginStatus);
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    handleAccount,
+    handleNotification,
+    handleHistory,
+    handleSignOut,
+    checkLoginStatus,
+  };
+}

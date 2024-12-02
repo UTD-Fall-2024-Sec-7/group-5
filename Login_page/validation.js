@@ -121,3 +121,10 @@ allInputs.forEach(input => {
     }
   })
 })
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    getSignupFormErrors,
+    getLoginFormErrors,
+    users, // Exporting users for potential testing purposes
+  };
+}

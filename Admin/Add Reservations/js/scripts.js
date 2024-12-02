@@ -586,3 +586,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+// scripts.js
+
+// ... (your existing code)
+
+// Export the functions you want to test
+module.exports = {
+  getReservations,
+  saveReservations,
+  formatDate,
+  addThirtyDays,
+  getFirstDayOfMonth,
+  getLastDayOfMonth,
+  // Add other functions you wish to test
+};

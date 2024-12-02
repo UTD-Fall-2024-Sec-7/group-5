@@ -45,3 +45,5 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
           "../Customer/custDashboard/index.html?v=" + new Date().getTime(); // Redirect to customer page
   }
 });
+module.exports = { saveUser, handleLogin };
+module.exports = { saveUser, handleLogin };
