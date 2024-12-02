@@ -1,6 +1,8 @@
 // Import users from users.js
 import users from "./users.js";
 
+
+
 // Global variable to track user role
 let currentUserRole = null;
 
@@ -12,11 +14,18 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
   const password = document.getElementById("password").value;
   
   localStorage.setItem("loggedInUser", username)
-  
+  let newUsers = JSON.parse(localStorage.getItem("newUsers")) || [];
+
   // Find user in the imported users array
-  const user = users.find(
+  let user = users.find(
     (u) => u.email === username && u.password === password
   );
+  if(!user)
+  {
+    user = newUsers.find(
+      (u) => u.email === username && u.password === password
+    );
+  }
 
   if (user) {
     currentUserRole = user.role;
