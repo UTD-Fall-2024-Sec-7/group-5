@@ -193,7 +193,6 @@ function removeReservation(index) {
   }
 }
 
-
 /**
  * Handles editing of a reservation on index.html.
  */
@@ -225,6 +224,7 @@ function handleEdit() {
   const addButton = document.getElementById("addReservation");
   if (addButton) {
     addButton.textContent = "Update Reservation";
+    addButton.removeEventListener('click', addReservation);
     addButton.onclick = function () {
       updateReservation(editIndex);
     };
@@ -245,7 +245,7 @@ function updateReservation(index) {
     return;
   }
 
-  const updatedReservation = {
+  const reservation = {
     location: form.location.value.trim(),
     partySize: form.partySize.value,
     firstName: form.firstName.value.trim(),
@@ -258,14 +258,14 @@ function updateReservation(index) {
 
   // Basic validation
   if (
-    !updatedReservation.location ||
-    !updatedReservation.partySize ||
-    !updatedReservation.firstName ||
-    !updatedReservation.lastName ||
-    !updatedReservation.email ||
-    !updatedReservation.phone ||
-    !updatedReservation.date ||
-    !updatedReservation.time
+    !reservation.location ||
+    !reservation.partySize ||
+    !reservation.firstName ||
+    !reservation.lastName ||
+    !reservation.email ||
+    !reservation.phone ||
+    !reservation.date ||
+    !reservation.time
   ) {
     alert("Please fill in all fields.");
     return;
@@ -274,14 +274,14 @@ function updateReservation(index) {
   // Validate date is within allowed range
   const today = new Date();
   const thirtyDaysLater = addThirtyDays(today);
-  const selectedDate = new Date(updatedReservation.date);
+  const selectedDate = new Date(reservation.date);
 
   if (selectedDate < today || selectedDate > thirtyDaysLater) {
     alert("Please select a date within the next 30 days.");
     return;
   }
 
-  reservations[index] = updatedReservation;
+  reservations[index] = reservation;
   saveReservations(reservations);
   alert("Reservation updated successfully!");
   form.reset();
@@ -509,9 +509,11 @@ function initializePage() {
   if (currentPage === "index.html" || currentPage === "") {
     // Add Reservation Page
     const addButton = document.getElementById("addReservation");
-    if (addButton) {
+    if(addButton)
+    {
       addButton.addEventListener("click", addReservation);
     }
+    
 
     // Handle Edit if applicable
     handleEdit();
